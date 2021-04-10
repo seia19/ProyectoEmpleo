@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Código Repetitivo, realizando layout del menú-principal con expresión fragment de Thymeleaf -->
+
+<nav th:fragment="menu-principal" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" th:href="@{/}">EmpleosApp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+              <a class="nav-link" th:href="@{/vacantes/indexPaginate}">Vacantes</a>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+              <a class="nav-link" th:href="@{/categorias/indexPaginate}">Categorias</a>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+             <a class="nav-link" th:href="@{/usuarios/index}" >Usuarios</a>
+            </li> 
+                     
+          </ul>  
+          
+          <div sec:authorize="isAnonymous()"> <!-- mostrando botones Ingresar & Registrarse cuando el usuario sea anónimo (no registrado) -->
+          
+          	<a class="btn btn-primary" th:href="@{/index}">Ingresar</a>&nbsp;
+          	
+          
+          </div>
+          
+          <div sec:authorize="isAuthenticated()"> <!-- mostrando boton salir y texto bienvenido, en caso de que el usuario esté registrado -->
+           <a class="btn btn-primary" th:href="@{/signup}">Registrar Usuario</a>&nbsp; <!-- &nbsp = No breaking space -->
+	          <span class="text-light">Bienvenido</span> &nbsp; <span class="text-light" sec:authentication="name"/> &nbsp;  <!-- Mostrando nombre del usuario loggeado sec:autentication de Spring Security -->
+	          <a class="btn btn-primary" th:href="@{/logout}">Salir</a>
+        
+        </div>
+        
+        </div>
+      </nav>
+
+</head>
+<body>
+
+</body>
+</html>

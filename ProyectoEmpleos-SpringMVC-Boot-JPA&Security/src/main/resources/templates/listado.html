@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>lista de empleos</title>
+</head>
+<body>
+
+<h1>Vacantes Disponibles</h1>
+
+<!-- thymeleaf code Ciclo forEach -->
+
+	<tr th:each="cicloTemp: ${listaEmpleos}">
+	<li> 
+		<td th:text="${cicloTemp}"></td>
+	</li>
+	</tr>
+
+</body>
+</html>

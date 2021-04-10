@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Lista de Vacantes</title>
+</head>
+
+<!-- librería bootstrap: -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+		<!-- Logotipo -->
+ <img th:src="@{/images/logo.png}"> </img>
+		
+<h1 class="text-primary"> <p class="text-center">Lista de Vacantes.</p></h1>
+
+<body>
+<table class="table table-hover">
+	
+	<!-- estableciendo fila principal 'tr' -->
+	
+	<tr class="text-center">
+		<th>logo</th>
+		<th>Id</th>
+		<th>Nombre</th>
+		<th>Fecha de Publicacion</th>
+		<th>Descripcion</th>
+		<th>Salario</th>
+		<th>Destacado</th>
+		<th>eliminar</th>
+	</tr>
+		<!-- Thymeleaf:  ciclo each  recorre la lista establecida en  ListaVacantesController en base a atributos establecidos en Vacante -->
+<tr th:each="tempVacante : ${vacante}" >
+
+	<!-- img dinámica -->
+	<td>
+			<img th:src="@{/images/{varTempImg} (varTempImg=${tempVacante.imagen})}" width="60" height="60"/>
+	</td>
+	
+	<td th:text="${tempVacante.id}"></td>
+	<td class="table-secondary" th:text="${tempVacante.nombre}"></td>
+	<td th:text="${tempVacante.fechaPublicacion}"></td>
+	<td class="table-primary" th:text="${tempVacante.descripcion}"></td>
+	<td th:text="${tempVacante.salario}"></td>
+	
+					<!-- Condicional if unless + clase badge (distintivo/insignia) de bootstrap-->
+	<td> 
+		 <span th:if="${tempVacante.destacado ==1}" class="badge badge-success btn-info"> Si </span> 
+	     <span th:unless="${tempVacante.destacado ==1}" class="badge text-danger "> No</span>
+	</td> 
+	
+		
+	<td>  <!-- link dinámico -->
+		<a th:href="@{/vacantes/view/{varTempID} (varTempID=${tempVacante.id}) }" class="btn btn-success" > Ver Detalle </a>
+	</td>
+		<td>  <!-- link dinámico -->
+		<a th:href="@{/vacantes/delete/{id} (id=${tempVacante.id}) }" class="btn btn-danger" > eliminar </a>
+	</td>
+</tr>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+</body>
+</html>
